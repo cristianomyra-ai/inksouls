@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Jade Stare — INK SOULS #001 | The Story of Tangerina</title>
+<meta name="description" content="Every artwork in INK SOULS begins as a real photograph — a real animal, a real moment. This is the story behind The Jade Stare.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --cream:#F2EDE4; --ink:#1A0E05; --amber:#D4873A;
+    --jade:#5BAE88; --grey:#8A7A62; --light:#F8F5F0;
+  }
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--cream); color:var(--ink); font-family:'DM Sans',sans-serif; font-weight:300; line-height:1.75; overflow-x:hidden; }
+
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:18px 40px; background:rgba(242,237,228,0.92); backdrop-filter:blur(8px); border-bottom:1px solid rgba(26,14,5,0.08); }
+  .nav-logo { font-family:'Playfair Display',serif; font-size:18px; letter-spacing:0.12em; color:var(--ink); text-decoration:none; }
+  .nav-right { display:flex; align-items:center; gap:20px; }
+  .nav-handle { font-size:13px; color:var(--amber); letter-spacing:0.05em; text-decoration:none; }
+
+  /* LANGUAGE TOGGLE */
+  .lang-toggle { display:flex; align-items:center; gap:0; border:1.5px solid var(--ink); overflow:hidden; }
+  .lang-btn { padding:5px 14px; font-size:11px; letter-spacing:0.12em; font-family:'DM Sans',sans-serif; font-weight:500; cursor:pointer; border:none; background:transparent; color:var(--grey); transition:all 0.2s; text-transform:uppercase; }
+  .lang-btn.active { background:var(--ink); color:var(--cream); }
+  .lang-btn:hover:not(.active) { background:rgba(26,14,5,0.06); }
+  .lang-sep { width:1px; background:var(--ink); height:28px; opacity:0.3; }
+
+  /* HERO */
+  .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; padding-top:72px; }
+  .hero-art { position:relative; overflow:hidden; }
+  .hero-art img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+  .hero-badge { position:absolute; bottom:32px; left:32px; background:var(--ink); color:var(--cream); font-size:11px; letter-spacing:0.15em; padding:8px 16px; text-transform:uppercase; }
+  .hero-text { display:flex; flex-direction:column; justify-content:center; padding:80px 64px; background:var(--light); }
+  .eyebrow { font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--amber); margin-bottom:20px; }
+  .hero-title { font-family:'Playfair Display',serif; font-size:clamp(42px,5vw,72px); line-height:1.05; margin-bottom:8px; }
+  .hero-subtitle { font-family:'Playfair Display',serif; font-style:italic; font-size:16px; color:var(--grey); margin-bottom:40px; }
+  .hero-tagline { font-size:15px; color:var(--grey); border-left:2px solid var(--amber); padding-left:16px; margin-bottom:48px; line-height:1.6; }
+  .btn-row { display:flex; gap:12px; flex-wrap:wrap; }
+  .btn { display:inline-block; padding:12px 24px; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; transition:all 0.2s; font-family:'DM Sans',sans-serif; font-weight:500; }
+  .btn-primary { background:var(--ink); color:var(--cream); border:1.5px solid var(--ink); }
+  .btn-primary:hover { background:transparent; color:var(--ink); }
+  .btn-outline { background:transparent; color:var(--ink); border:1.5px solid var(--ink); }
+  .btn-outline:hover { background:var(--ink); color:var(--cream); }
+  .btn-amber { background:transparent; color:var(--amber); border:1.5px solid var(--amber); }
+  .btn-amber:hover { background:var(--amber); color:var(--cream); }
+
+  /* DIVIDER */
+  .divider { display:flex; align-items:center; gap:20px; padding:0 40px; margin:60px 0; opacity:0.3; }
+  .divider::before,.divider::after { content:''; flex:1; height:1px; background:var(--ink); }
+  .divider-mark { width:6px; height:6px; background:var(--ink); border-radius:50%; }
+
+  /* SECTIONS */
+  .section { padding:80px 40px; max-width:1200px; margin:0 auto; }
+  .section-label { font-size:10px; letter-spacing:0.25em; text-transform:uppercase; color:var(--amber); margin-bottom:40px; display:flex; align-items:center; gap:12px; }
+  .section-label::after { content:''; flex:0 0 40px; height:1px; background:var(--amber); }
+
+  /* DIPTYCH */
+  .diptych { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-bottom:80px; background:var(--ink); }
+  .diptych-item { background:var(--cream); overflow:hidden; }
+  .diptych-item img { width:100%; height:420px; object-fit:cover; display:block; transition:transform 0.6s ease; }
+  .diptych-item:hover img { transform:scale(1.03); }
+  .diptych-caption { padding:16px 20px; font-size:11px; letter-spacing:0.1em; color:var(--grey); text-transform:uppercase; }
+
+  /* STORY */
+  .story-grid { display:grid; grid-template-columns:280px 1fr; gap:80px; align-items:start; }
+  .story-sidebar { position:sticky; top:100px; }
+  .story-sidebar img { width:100%; aspect-ratio:3/4; object-fit:cover; margin-bottom:16px; }
+  .sidebar-caption { font-size:11px; color:var(--grey); letter-spacing:0.05em; line-height:1.6; }
+  .story-text h2 { font-family:'Playfair Display',serif; font-size:32px; font-style:italic; margin-bottom:32px; line-height:1.2; }
+  .story-text p { font-size:16px; line-height:1.85; color:#3A2A1A; margin-bottom:24px; }
+  .story-text p.drop { font-family:'Playfair Display',serif; font-size:20px; color:var(--ink); }
+  .story-quote { border-left:3px solid var(--jade); padding:20px 28px; margin:40px 0; background:rgba(91,174,136,0.06); }
+  .story-quote p { font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:var(--ink); margin:0; line-height:1.5; }
+
+  /* COMIC */
+  .comic-section { background:var(--ink); padding:80px 40px; }
+  .comic-inner { max-width:1200px; margin:0 auto; }
+  .comic-header { text-align:center; margin-bottom:48px; }
+  .comic-header .section-label { color:var(--amber); justify-content:center; margin-bottom:20px; }
+  .comic-header .section-label::after { display:none; }
+  .comic-header h2 { font-family:'Playfair Display',serif; font-size:36px; color:var(--cream); margin-bottom:12px; }
+  .comic-header p { color:rgba(242,237,228,0.55); font-size:14px; letter-spacing:0.05em; }
+  .comic-image { width:100%; max-width:960px; margin:0 auto; display:block; border:1px solid rgba(242,237,228,0.1); }
+
+  /* TODAY */
+  .today-section { padding:80px 40px; max-width:1200px; margin:0 auto; }
+  .today-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+  .today-photo { position:relative; }
+  .today-photo img { width:100%; aspect-ratio:4/5; object-fit:cover; display:block; }
+  .today-photo-frame { position:absolute; inset:-8px; border:1px solid var(--ink); pointer-events:none; opacity:0.15; }
+  .today-text h2 { font-family:'Playfair Display',serif; font-size:40px; line-height:1.1; margin-bottom:24px; }
+  .today-text p { font-size:15px; line-height:1.85; color:#3A2A1A; margin-bottom:20px; }
+  .stat-row { display:flex; gap:40px; margin:40px 0; padding:32px 0; border-top:1px solid rgba(26,14,5,0.1); border-bottom:1px solid rgba(26,14,5,0.1); }
+  .stat-num { font-family:'Playfair Display',serif; font-size:36px; color:var(--amber); display:block; }
+  .stat-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey); }
+
+  /* OWN */
+  .own-section { background:var(--light); padding:80px 40px; text-align:center; }
+  .own-section h2 { font-family:'Playfair Display',serif; font-size:40px; margin-bottom:12px; }
+  .own-section > p { color:var(--grey); font-size:15px; margin-bottom:48px; max-width:480px; margin-left:auto; margin-right:auto; }
+  .own-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:900px; margin:0 auto 48px; }
+  .own-card { border:1.5px solid rgba(26,14,5,0.12); padding:36px 24px; text-align:left; text-decoration:none; color:var(--ink); transition:all 0.25s; background:var(--cream); display:block; }
+  .own-card:hover { border-color:var(--ink); transform:translateY(-4px); box-shadow:0 12px 32px rgba(26,14,5,0.08); }
+  .own-card-label { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--amber); margin-bottom:12px; }
+  .own-card h3 { font-family:'Playfair Display',serif; font-size:22px; margin-bottom:8px; }
+  .own-card p { font-size:13px; color:var(--grey); line-height:1.6; margin:0 0 20px; }
+  .own-card-price { font-size:18px; font-weight:500; color:var(--ink); }
+
+  /* FOOTER */
+  footer { background:var(--ink); color:rgba(242,237,228,0.5); text-align:center; padding:48px 40px; font-size:13px; letter-spacing:0.08em; }
+  .footer-logo { font-family:'Playfair Display',serif; font-size:22px; color:var(--cream); letter-spacing:0.15em; display:block; margin-bottom:8px; }
+  .footer-handle { color:var(--amber); }
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .hero { grid-template-columns:1fr; }
+    .hero-art { height:60vw; min-height:340px; }
+    .hero-text { padding:48px 28px; }
+    .diptych { grid-template-columns:1fr; }
+    .diptych-item img { height:280px; }
+    .story-grid { grid-template-columns:1fr; }
+    .story-sidebar { position:static; }
+    .today-grid { grid-template-columns:1fr; }
+    .own-cards { grid-template-columns:1fr; }
+    nav { padding:16px 24px; }
+    .section { padding:60px 24px; }
+    .comic-section { padding:60px 24px; }
+    .today-section { padding:60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">INK SOULS</a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <div class="lang-sep"></div>
+      <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    </div>
+    <a class="nav-handle" href="https://www.instagram.com/pet_inkart" target="_blank">@pet_inkart</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-art">
+    <img src="arte_001.png" alt="The Jade Stare — INK SOULS #001">
+    <div class="hero-badge">INK SOULS Vol.1 — #001 of 9</div>
+  </div>
+  <div class="hero-text">
+    <p class="eyebrow" data-en="The Story Behind the Soul" data-pt="A História por Trás da Alma">The Story Behind the Soul</p>
+    <h1 class="hero-title">The Jade<br>Stare</h1>
+    <p class="hero-subtitle">— Dignity —</p>
+    <p class="hero-tagline" data-en="Every artwork in INK SOULS begins as a real photograph — a real animal, a real moment.<br>This is the story of Tangerina." data-pt="Cada obra do INK SOULS começa como uma fotografia real — um animal real, um momento real.<br>Esta é a história do Tangerina.">
+      Every artwork in INK SOULS begins as a real photograph — a real animal, a real moment.<br>This is the story of Tangerina.
+    </p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="https://opensea.io/collection/ink-souls-official" target="_blank" data-en="Own the NFT · 0.08 ETH" data-pt="Adquirir NFT · 0.08 ETH">Own the NFT · 0.08 ETH</a>
+      <a class="btn btn-outline" href="https://www.redbubble.com/people/petinkart/shop" target="_blank" data-en="Buy a Print" data-pt="Comprar Print">Buy a Print</a>
+      <a class="btn btn-amber" href="https://colab55.com/@petinkart" target="_blank">Colab55</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-mark"></div></div>
+
+<!-- DIPTYCH -->
+<div style="max-width:1200px;margin:0 auto;padding:0 40px;">
+  <p class="section-label" data-en="Then & Now" data-pt="Antes & Hoje">Then & Now</p>
+  <div class="diptych">
+    <div class="diptych-item">
+      <img src="foto_filhote.jpg" alt="Tangerina filhote — primeiros dias em casa, 2023">
+      <p class="diptych-caption" data-en="March 2023 — First days at home" data-pt="Março 2023 — Primeiros dias em casa">March 2023 — First days at home</p>
+    </div>
+    <div class="diptych-item">
+      <img src="foto_adulto.jpg" alt="Tangerina hoje — o olhar que inspirou a arte">
+      <p class="diptych-caption" data-en="2026 — The look that became the art" data-pt="2026 — O olhar que virou arte">2026 — The look that became the art</p>
+    </div>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="section">
+  <p class="section-label" data-en="The Story" data-pt="A História">The Story</p>
+  <div class="story-grid">
+    <div class="story-sidebar">
+      <img src="foto_dormindo.jpg" alt="Tangerina dormindo">
+      <p class="sidebar-caption" data-en='"This photograph was taken days after he arrived. It was the first time he slept in peace."' data-pt='"Esta fotografia foi tirada dias após ele chegar. Era a primeira vez que ele dormia em paz."'>
+        "This photograph was taken days after he arrived. It was the first time he slept in peace."
+      </p>
+    </div>
+    <div class="story-text">
+      <h2 data-en='"The Night of the Little Box"' data-pt='"A Madrugada da Caixinha"'>"The Night of the Little Box"</h2>
+
+      <p class="drop" data-en="It was the middle of the night when she heard the noise." data-pt="Era madrugada quando ela ouviu o barulho.">It was the middle of the night when she heard the noise.</p>
+
+      <p data-en="Not a common sound. It was the dull thud of a boot kicking cardboard — and then, meowing. Weak, fading meows coming from a dark alley in the periphery of the Zona Leste of São Paulo." data-pt="Não era um som comum. Era o barulho surdo de coturno chutando papelão — e depois, miados. Miados fracos, apagados, vindos de uma viela escura na Zona Leste de São Paulo.">Not a common sound. It was the dull thud of a boot kicking cardboard — and then, meowing. Weak, fading meows coming from a dark alley in the periphery of the Zona Leste of São Paulo.</p>
+
+      <p data-en="She went to the window and saw the police officers pushing a small cardboard box into the darkness of the street. She waited for them to leave. Then she put on her coat, went downstairs, and entered the alley." data-pt="Ela foi até a janela e viu os policiais empurrando uma caixinha de papelão para o escuro da rua. Esperou eles irem embora. Então vestiu o casaco, desceu, e entrou na viela.">She went to the window and saw the police officers pushing a small cardboard box into the darkness of the street. She waited for them to leave. Then she put on her coat, went downstairs, and entered the alley.</p>
+
+      <div class="story-quote">
+        <p data-en='"Inside the box: two kittens. Frightened. Debilitated. Trembling."' data-pt='"Dentro da caixa: dois filhotes. Assustados. Debilitados. Tremendo."'>"Inside the box: two kittens. Frightened. Debilitated. Trembling."</p>
+      </div>
+
+      <p data-en="She had no space. She had a dog. She had a husband who might not understand. She had a simple home in the periphery that barely fit what was already inside. Even so, she brought them both in — put them in the bathroom, the only safe place away from the dog. She gave them what she had: dog food and all the improvised care she could offer." data-pt="Ela não tinha espaço. Tinha um cachorro. Tinha um marido que talvez não entendesse. Tinha uma casa simples na periferia que mal cabia o que já estava nela. Mesmo assim, ela trouxe os dois para dentro — colocou-os no banheiro, o único lugar seguro longe do cachorro. Deu a eles o que tinha: ração de cachorro e todo cuidado improvisado que conseguia oferecer.">She had no space. She had a dog. She had a husband who might not understand. She had a simple home in the periphery that barely fit what was already inside. Even so, she brought them both in — put them in the bathroom, the only safe place away from the dog. She gave them what she had: dog food and all the improvised care she could offer.</p>
+
+      <p data-en='Days later, she posted on social media: &lt;em&gt;"Two kittens for adoption. They need a home."&lt;/em&gt;' data-pt='Dias depois, ela publicou nas redes sociais: &lt;em&gt;"Dois gatinhos para adoção. Precisam de um lar."&lt;/em&gt;'>Days later, she posted on social media: <em>"Two kittens for adoption. They need a home."</em></p>
+
+      <p data-en="That's how we met Tangerina. When we saw the post, we didn't think twice. We went as a family — my wife, my daughter, my sister-in-law and I. Each family would take one of the little brothers." data-pt="Foi assim que conhecemos o Tangerina. Quando vimos a publicação, não pensamos duas vezes. Fomos em família — eu, minha esposa, minha filha e a irmã da minha esposa. Cada família iria ficar com um dos irmãozinhos.">That's how we met Tangerina. When we saw the post, we didn't think twice. We went as a family — my wife, my daughter, my sister-in-law and I. Each family would take one of the little brothers.</p>
+
+      <p data-en="We arrived at a dark, cold bathroom. Two tiny kittens — with diarrhea, fungus in their ears, and eyes wider than their whole bodies seemed able to carry." data-pt="Chegamos a um banheiro escuro e frio. Dois filhotes minúsculos — com diarreia, fungos nas orelhas, e os olhos maiores do que o corpo inteiro parecia suportar.">We arrived at a dark, cold bathroom. Two tiny kittens — with diarrhea, fungus in their ears, and eyes wider than their whole bodies seemed able to carry.</p>
+
+      <p data-en="We chose Tangerina. His brother, quieter and more debilitated, went with the other family." data-pt="Escolhemos o Tangerina. O irmão dele, mais quietinho e debilitado, foi com a outra família.">We chose Tangerina. His brother, quieter and more debilitated, went with the other family.</p>
+
+      <p data-en="The months that followed were intense care. My wife, with years of experience with animals, treated the fungus, corrected the diet, and gave him the time and love he needed." data-pt="Os meses que se seguiram foram de cuidado intenso. Minha esposa, com anos de experiência com animais, tratou os fungos, corrigiu a alimentação e deu a ele o tempo e o amor que precisava.">The months that followed were intense care. My wife, with years of experience with animals, treated the fungus, corrected the diet, and gave him the time and love he needed.</p>
+
+      <div class="story-quote">
+        <p data-en='"Today, Tangerina is a large, healthy, and beautiful cat. He brings, every day, a quiet and constant happiness to our home."' data-pt='"Hoje, o Tangerina é um gato grande, saudável e lindo. Ele traz, todos os dias, uma felicidade silenciosa e constante ao nosso lar."'>"Today, Tangerina is a large, healthy, and beautiful cat. He brings, every day, a quiet and constant happiness to our home."</p>
+      </div>
+
+      <p style="font-size:14px;color:var(--grey);margin-top:32px;" data-en="From that gaze was born &lt;strong&gt;The Jade Stare — #001&lt;/strong&gt;. The first soul of the INK SOULS series." data-pt="Desse olhar nasceu &lt;strong&gt;O Olhar de Jade — #001&lt;/strong&gt;. A primeira alma da série INK SOULS.">From that gaze was born <strong>The Jade Stare — #001</strong>. The first soul of the INK SOULS series.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMIC -->
+<div class="comic-section">
+  <div class="comic-inner">
+    <div class="comic-header">
+      <p class="section-label" style="justify-content:center;" data-en="The Rescue · Illustrated" data-pt="O Resgate · Ilustrado">The Rescue · Illustrated</p>
+      <h2 data-en="The Night of the Little Box" data-pt="A Madrugada da Caixinha">The Night of the Little Box</h2>
+      <p data-en="The full story in 6 panels — Japanese ink illustration" data-pt="A história completa em 6 painéis — ilustração japonesa em nanquim">The full story in 6 panels — Japanese ink illustration</p>
+    </div>
+    <img class="comic-image" src="quadrinho.png" alt="A história do Tangerina em 6 painéis">
+  </div>
+</div>
+
+<!-- TODAY -->
+<section class="today-section">
+  <p class="section-label" data-en="Tangerina Today" data-pt="Tangerina Hoje">Tangerina Today</p>
+  <div class="today-grid">
+    <div class="today-photo">
+      <img src="foto_adulto.jpg" alt="Tangerina — o olhar de jade">
+      <div class="today-photo-frame"></div>
+    </div>
+    <div class="today-text">
+      <h2 data-en="From a cardboard box<br>to the jade stare." data-pt="De uma caixinha de papelão<br>ao olhar de jade.">From a cardboard box<br>to the jade stare.</h2>
+      <p data-en="A cold alley in Zona Leste. Two abandoned kittens. A woman who didn't have to help — and did anyway. A family who saw a social media post and drove across the city." data-pt="Uma viela fria na Zona Leste. Dois filhotes abandonados. Uma mulher que não precisava ajudar — e ajudou mesmo assim. Uma família que viu uma publicação nas redes e atravessou a cidade.">A cold alley in Zona Leste. Two abandoned kittens. A woman who didn't have to help — and did anyway. A family who saw a social media post and drove across the city.</p>
+      <p data-en="That is the full story of how this gaze came to exist. These jade green eyes, which once stared out from the darkness of a cardboard box, now look directly at the world. With dignity. Without apology. Completely at home." data-pt="Essa é a história completa de como esse olhar passou a existir. Esses olhos jade, que um dia fitaram o escuro de uma caixinha de papelão, agora olham diretamente para o mundo. Com dignidade. Sem pedir desculpa. Completamente em casa.">That is the full story of how this gaze came to exist. These jade green eyes, which once stared out from the darkness of a cardboard box, now look directly at the world. With dignity. Without apology. Completely at home.</p>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-num">2023</span><span class="stat-label" data-en="Year of Rescue" data-pt="Ano do Resgate">Year of Rescue</span></div>
+        <div class="stat"><span class="stat-num">#001</span><span class="stat-label" data-en="First Soul · Vol. 1" data-pt="Primeira Alma · Vol. 1">First Soul · Vol. 1</span></div>
+        <div class="stat"><span class="stat-num">1/1</span><span class="stat-label" data-en="Unique Edition" data-pt="Edição Única">Unique Edition</span></div>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://opensea.io/collection/ink-souls-official" target="_blank" data-en="View on OpenSea" data-pt="Ver no OpenSea">View on OpenSea</a>
+        <a class="btn btn-outline" href="https://www.instagram.com/pet_inkart" target="_blank" data-en="Follow @pet_inkart" data-pt="Seguir @pet_inkart">Follow @pet_inkart</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OWN -->
+<section class="own-section">
+  <p class="eyebrow" style="margin-bottom:12px;" data-en="Own This Soul" data-pt="Leve Esta Alma">Own This Soul</p>
+  <h2>The Jade Stare</h2>
+  <p data-en="One story. Three ways to bring it home." data-pt="Uma história. Três formas de levar para casa.">One story. Three ways to bring it home.</p>
+  <div class="own-cards">
+    <a class="own-card" href="https://opensea.io/collection/ink-souls-official" target="_blank">
+      <p class="own-card-label" data-en="NFT · Blockchain" data-pt="NFT · Blockchain">NFT · Blockchain</p>
+      <h3 data-en="Original Token" data-pt="Token Original">Original Token</h3>
+      <p data-en="1/1 on Polygon. Unique, permanent, yours. 10% royalties support the artist on every resale." data-pt="1/1 na Polygon. Único, permanente, seu. 10% de royalties ao artista em cada revenda.">1/1 on Polygon. Unique, permanent, yours. 10% royalties support the artist on every resale.</p>
+      <span class="own-card-price">0.08 ETH</span>
+    </a>
+    <a class="own-card" href="https://www.redbubble.com/people/petinkart/shop" target="_blank">
+      <p class="own-card-label" data-en="Print · Global" data-pt="Print · Global">Print · Global</p>
+      <h3 data-en="Art Print" data-pt="Arte Impressa">Art Print</h3>
+      <p data-en="Museum-quality print on fine paper. Ships worldwide. Multiple sizes available." data-pt="Impressão em papel de alta qualidade. Envio para o mundo todo. Vários tamanhos disponíveis.">Museum-quality print on fine paper. Ships worldwide. Multiple sizes available.</p>
+      <span class="own-card-price" data-en="from $24" data-pt="a partir de $24">from $24</span>
+    </a>
+    <a class="own-card" href="https://colab55.com/@petinkart" target="_blank">
+      <p class="own-card-label">Produto · Brasil</p>
+      <h3 data-en="T-Shirt & Poster" data-pt="Camiseta & Poster">T-Shirt & Poster</h3>
+      <p data-en="Made in Brazil. Digital silk screen. Fast delivery. Your purchase directly supports the artist." data-pt="Feito no Brasil. Silk digital. Entrega rápida. Sua compra apoia o artista diretamente.">Made in Brazil. Digital silk screen. Fast delivery. Your purchase directly supports the artist.</p>
+      <span class="own-card-price" data-en="from R$119" data-pt="a partir de R$119">from R$119</span>
+    </a>
+  </div>
+  <p style="font-size:13px;color:var(--grey);font-style:italic;" data-en='"Every animal has a story. Ink makes it eternal."' data-pt='"Todo animal tem uma história. A tinta a torna eterna."'>"Every animal has a story. Ink makes it eternal."</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">INK SOULS</span>
+  <a class="footer-handle" href="https://www.instagram.com/pet_inkart" target="_blank">@pet_inkart</a>
+  <p style="margin-top:20px;font-size:12px;" data-en="© INK SOULS 2026 · All rights reserved · Original art by @pet_inkart" data-pt="© INK SOULS 2026 · Todos os direitos reservados · Arte original por @pet_inkart">© INK SOULS 2026 · All rights reserved · Original art by @pet_inkart</p>
+</footer>
+
+<script>
+function setLang(lang) {
+  // Atualiza botões
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+
+  // Atualiza todos os elementos com data-en / data-pt
+  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+    const text = el.getAttribute('data-' + lang);
+    // Usa innerHTML para suportar <em>, <strong>, <br>
+    el.innerHTML = text;
+  });
+
+  // Atualiza lang do html
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+}
+</script>
+
+</body>
+</html>
